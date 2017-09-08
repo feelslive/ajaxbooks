@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+<div class="app"></div>
+
+<script>
+	
+//请求json数据拼接字符串，并在URL传参数id跳转
+$(function(){
+    $.ajax({
+        type:"get",
+        url:"book.json",
+        dataType:"json",
+        success:function(res){
+        	console.log(res);
+            var str = "<ul class='con_ul'>";
+            $.each(res.books, function(idx,val) {
+            	console.log(val.id)
+                str +="<li class=\"sec_li\"><a href='booklist.html?bookId="+val.id+"' class='lp_li_a'><div class='lp_li_imgWrap'></div><p class='lp_li_name'>"
+                        +val.title+"</p><p class='lp_li_price'>"
+                        +'￥'+val.price+"</p></a><li>";
+            });
+            str += "</ul>";
+            $('.app').append(str);
+        },error:function(){
+            alert(error)
+        }
+    });
+})
+
+</script>
+	
+</body>
+</html>
